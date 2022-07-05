@@ -28,14 +28,42 @@ export default function App() {
         setCurrentNoteId(newNote.id)
     }
     
-    function updateNote(text) {
-        setNotes(oldNotes => oldNotes.map(oldNote => {
-            return oldNote.id === currentNoteId
-                ? { ...oldNote, body: text }
-                : oldNote
-        }))
+  function updateNote(text) {
+       // Try to rearrange the most recently-modified note to be at the top
+    setNotes(oldNotes => {
+      const newArray = []
+      for (let i = 0; i < oldNotes.length; i++) {
+        const oldNote = oldNotes[i]
+        if (oldNote.id === currentNoteId) {
+          newArray.unshift({...oldNote, body: text})
+        } else {
+          newArray.push(oldNote)
+        }
+      }
+      return newArray
+      //Create new empty array
+      //Loop over the original array
+        //if the id matches
+          //put the udated note at the 
+          //begining of the new array
+        //else
+          //push the old note to the end
+          //of the new array
+      //return the new array
+    })
+      
+      // This does not rearrange the notes
+        // setNotes(oldNotes => oldNotes.map(oldNote => {
+        //     return oldNote.id === currentNoteId
+        //         ? { ...oldNote, body: text }
+        //         : oldNote
+        // }))
     }
     
+  function deleteNote(event, noteId) {
+    event.stopPropagation()
+    setNotes(oldNotes => oldNotes.filter(note => note.id !==noteId))
+  }
     function findCurrentNote() {
         return notes.find(note => {
             return note.id === currentNoteId
@@ -56,7 +84,8 @@ export default function App() {
                     notes={notes}
                     currentNote={findCurrentNote()}
                     setCurrentNoteId={setCurrentNoteId}
-                    newNote={createNewNote}
+                newNote={createNewNote}
+                deleteNote={deleteNote}
                 />
                 {
                     currentNoteId && 
