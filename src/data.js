@@ -1,5 +1,6 @@
+/* eslint-disable import/prefer-default-export */
 // eslint-disable-next-line no-unused-vars
-import React from 'react'
+import React from 'react';
 
 export const data = [
   {
@@ -16,10 +17,10 @@ export const data = [
     
     Hers's a division 👆`,
   },
-  { id: 2, body: `a` },
-  { id: 3, body: `b` },
-  { id: 4, body: `c` },
-  { id: 5, body: `d` },
-  { id: 6, body: `e` },
-  
-]
+  { id: 2, body: 'a' },
+  { id: 3, body: 'b' },
+  { id: 4, body: 'c' },
+  { id: 5, body: 'd' },
+  { id: 6, body: 'e' },
+
+];
